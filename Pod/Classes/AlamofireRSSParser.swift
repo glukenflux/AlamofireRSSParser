@@ -116,6 +116,12 @@ open class AlamofireRSSParser: NSObject, XMLParserDelegate {
         
         self.currentAttributes = attributeDict
         
+        if (elementName == "media:content") {
+            if let url = attributeDict["url"] {
+                self.currentItem?.mediaUrl = url
+            }
+        }
+        
         if ((elementName == "item") || (elementName == "entry")) {
             self.currentItem = RSSItem()
         }
